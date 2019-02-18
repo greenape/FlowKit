@@ -18,6 +18,7 @@ pyzmq = "*"
 "psycopg2-binary" = "*"
 structlog = "*"
 shapely = "*"
+marshmallow = "*"
 
 [dev-packages]
 scipy = "*"
@@ -39,3 +40,6 @@ watchdog = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
