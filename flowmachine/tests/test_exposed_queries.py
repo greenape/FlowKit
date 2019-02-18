@@ -1,7 +1,12 @@
-from flowmachine.core.server.exposed_queries import make_query_object, DailyLocationExposed
+import pytest
+
+from flowmachine.core.server.exposed_queries import make_query_object, DailyLocationExposed, ValidationError
 
 
 def test_daily_location():
+    """
+    Can successfully construct a daily location object from valid parameters.
+    """
 
     dl_params = {
         'date': '2016-01-01',
@@ -17,3 +22,26 @@ def test_daily_location():
     assert "most-common" == dl.method
     assert "admin3" == dl.aggregation_unit
     assert "all" == dl.subscriber_subset
+
+
+@pytest.mark.parametrize("param_name, invalid_value, expected_error_msg", [
+    ("date", "3999-99-99", "Not a valid date"),
+    ("method", "foobar", "Method must be one of"),
+    ("aggregation_unit", "admin99", "Aggregation unit must be one of"),
+    ("subscriber_subset", "<INVALID_SUBSCRIBER>", "Subscriber subset must be one of"),
+])
+def test_invalid_date_raises_error(param_name, invalid_value, expected_error_msg):
+    # Start with valid parameters
+    params = {
+        'date': '2016-01-01',
+        'method': 'most-common',
+        'aggregation_unit': 'admin3',
+        'subscriber_subset': 'all',
+    }
+
+    # Replace one of the parameters with an invalid valie
+    params[param_name] = invalid_value
+
+    # Confirm that the invalid parameter causes the expeted error
+    with pytest.raises(ValidationError, match=expected_error_msg):
+        make_query_object("daily_location", params)
