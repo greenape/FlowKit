@@ -15,6 +15,7 @@ from zmq.asyncio import Context
 from flowmachine.core import connect
 from .query_proxy import (
     QueryProxy,
+    InvalidGeographyError,
     MissingQueryError,
     QueryProxyError,
     construct_query_object,
