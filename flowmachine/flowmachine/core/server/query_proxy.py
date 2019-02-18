@@ -21,6 +21,7 @@ from flowmachine.features import (
     MeaningfulLocationsAggregate,
 )
 from flowmachine.features.utilities.subscriber_locations import subscriber_locations
+from flowmachine.core.server.exposed_queries import make_query_object, ValidationError
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
@@ -135,32 +136,9 @@ def construct_query_object(query_kind, params):  # pragma: no cover
         pass  # No subset param
 
     if "daily_location" == query_kind:
-        date = params["date"]
-        method = params["daily_location_method"]
-        level = params["aggregation_unit"]
-        subscriber_subset = params["subscriber_subset"]
-
-        allowed_methods = ["last", "most-common"]
-        allowed_levels = ["admin0", "admin1", "admin2", "admin3", "admin4"]
-
-        if method not in allowed_methods:
-            raise QueryProxyError(
-                f"{error_msg_prefix}: 'Unrecognised method '{method}', must be one of: {allowed_methods}'"
-            )
-
-        if level not in allowed_levels:
-            raise QueryProxyError(
-                f"{error_msg_prefix}: 'Unrecognised level '{level}', must be one of: {allowed_levels}'"
-            )
-
         try:
-            q = daily_location(
-                date=date,
-                method=method,
-                level=level,
-                subscriber_subset=subscriber_subset,
-            )
-        except Exception as e:
+            return make_query_object(query_kind, params)
+        except ValidationError as e:
             raise QueryProxyError(f"{error_msg_prefix}: '{e}'")
     elif "location_event_counts" == query_kind:
         start_date = params["start_date"]
