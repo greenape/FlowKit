@@ -22,7 +22,7 @@ class DailyLocationSchema(Schema):
     date = fields.Date()
     daily_location_method = fields.String()
     aggregation_unit = fields.String()
-    subscriber_subset = fields.String()
+    subscriber_subset = fields.String(default="all", allow_none=True)
 
     @validates("daily_location_method")
     def validate_daily_location_method(self, value):
@@ -38,7 +38,7 @@ class DailyLocationSchema(Schema):
 
     @validates("subscriber_subset")
     def validate_subscriber_subset(self, value):
-        allowed_values = ["all"]
+        allowed_values = [None, "all"]
         if value not in allowed_values:
             raise ValidationError(f"Subscriber subset must be one of: {allowed_values}")
 
