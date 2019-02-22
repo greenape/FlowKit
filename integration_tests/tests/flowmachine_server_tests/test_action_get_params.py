@@ -23,16 +23,16 @@ from .helpers import poll_until_done, send_message_and_get_reply
             "aggregation_unit": "admin1",
             "subscriber_subset": "all",
         },
-        {
-            "query_kind": "location_event_counts",
-            "start_date": "2016-01-03",
-            "end_date": "2016-01-05",
-            "direction": "both",
-            "event_types": "all",
-            "interval": "hour",
-            "aggregation_unit": "admin2",
-            "subscriber_subset": "all",
-        },
+        # {
+        #     "query_kind": "location_event_counts",
+        #     "start_date": "2016-01-03",
+        #     "end_date": "2016-01-05",
+        #     "direction": "both",
+        #     "event_types": "all",
+        #     "interval": "hour",
+        #     "aggregation_unit": "admin2",
+        #     "subscriber_subset": "all",
+        # },
     ],
 )
 @pytest.mark.asyncio
