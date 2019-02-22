@@ -447,8 +447,11 @@ class QueryProxy:
                 q_agg.store()
                 query_id = q_agg.md5
             except AttributeError:
-                # This can happen for flows, which doesn't support aggregation
-                query_id = q.md5
+                if isinstance(q, Flows):
+                    # A valid AttributeError can happen for flows, which don't support aggregation
+                    query_id = q.md5
+                else:
+                    raise
             self._create_redis_lookup(query_id)
             logger.debug(f"Triggered store for query {query_id}")
 
