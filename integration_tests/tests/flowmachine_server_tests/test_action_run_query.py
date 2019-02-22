@@ -100,7 +100,7 @@ async def test_run_query(zmq_url, fm_conn, redis):
                 "aggregation_unit": "admin3",
                 "subscriber_subset": "all",
             },
-            "month must be in 1..12",
+            "{'date': ['Not a valid date.']}",
         ),
         (
             {
@@ -109,7 +109,7 @@ async def test_run_query(zmq_url, fm_conn, redis):
                 "aggregation_unit": "admin3",
                 "subscriber_subset": "all",
             },
-            "Unrecognised method 'FOOBAR', must be one of: ['last', 'most-common']",
+            """{'daily_location_method': ["Method must be one of: ['last', 'most-common']"]}""",
         ),
         (
             {
@@ -118,7 +118,7 @@ async def test_run_query(zmq_url, fm_conn, redis):
                 "aggregation_unit": "admin9999",
                 "subscriber_subset": "all",
             },
-            "Unrecognised level 'admin9999', must be one of: ['admin0', 'admin1', 'admin2', 'admin3', 'admin4']",
+            """{'aggregation_unit': ["Aggregation unit must be one of: ['admin0', 'admin1', 'admin2', 'admin3']"]}""",
         ),
         (
             {
