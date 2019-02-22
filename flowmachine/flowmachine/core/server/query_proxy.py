@@ -141,56 +141,8 @@ def construct_query_object(query_kind, params):  # pragma: no cover
         except Exception as e:
             raise QueryProxyError(f"{error_msg_prefix}: '{e}'")
     elif "location_event_counts" == query_kind:
-        start_date = params["start_date"]
-        end_date = params["end_date"]
-        interval = params["interval"]
-        level = params["aggregation_unit"]
-        subscriber_subset = params["subscriber_subset"]
-        direction = params["direction"]
-        event_types = params["event_types"]
-
-        allowed_intervals = TotalLocationEvents.allowed_intervals
-        allowed_directions = ["in", "out", "all", "both"]
-        allowed_levels = [
-            "admin0",
-            "admin1",
-            "admin2",
-            "admin3",
-            "admin4",
-            "site",
-            "cell",
-        ]
-
-        if interval not in allowed_intervals:
-            raise QueryProxyError(
-                f"{error_msg_prefix}: 'Unrecognised interval '{interval}', must be one of: {allowed_intervals}'"
-            )
-
-        if level not in allowed_levels:
-            raise QueryProxyError(
-                f"{error_msg_prefix}: 'Unrecognised level '{level}', must be one of: {allowed_levels}'"
-            )
-
-        if level in ["cell", "site"]:
-            level = f"versioned-{level}"
-
-        if direction not in allowed_directions:
-            raise QueryProxyError(
-                f"{error_msg_prefix}: 'Unrecognised direction '{direction}', must be one of: {allowed_directions}'"
-            )
-        if direction == "all":
-            direction = "both"
-
         try:
-            q = TotalLocationEvents(
-                start=start_date,
-                stop=end_date,
-                direction=direction,
-                table=event_types,
-                level=level,
-                subscriber_subset=subscriber_subset,
-            )
-            logger.debug(f"Made TotalLocationEvents query. {q.__dict__}")
+            q = make_query_object(query_kind, params)
         except Exception as e:
             raise QueryProxyError(f"{error_msg_prefix}: '{e}'")
     elif "modal_location" == query_kind:
