@@ -13,7 +13,6 @@ class AggregationError(Exception):
 
 
 class BaseExposedQuery:
-
     def store(self, force=False):
         self.query.store(force=force)
 
@@ -21,7 +20,9 @@ class BaseExposedQuery:
         try:
             return self.query.aggregate()
         except AttributeError:
-            raise AggregationError(f"Query does not support aggregation: {type(self.query)}")
+            raise AggregationError(
+                f"Query does not support aggregation: {type(self.query)}"
+            )
 
     @property
     def md5(self):
@@ -29,15 +30,21 @@ class BaseExposedQuery:
 
 
 class DailyLocationExposed(BaseExposedQuery):
-
-    def __init__(self, *, date, daily_location_method, aggregation_unit, subscriber_subset):
+    def __init__(
+        self, *, date, daily_location_method, aggregation_unit, subscriber_subset
+    ):
         self.date = date
         self.daily_location_method = daily_location_method
         self.aggregation_unit = aggregation_unit
         self.subscriber_subset = subscriber_subset
 
         date_str = self.date.strftime("%Y-%m-%d")
-        self.query = daily_location(date=date_str, level=self.aggregation_unit, method=self.daily_location_method, subscriber_subset=self.subscriber_subset)
+        self.query = daily_location(
+            date=date_str,
+            level=self.aggregation_unit,
+            method=self.daily_location_method,
+            subscriber_subset=self.subscriber_subset,
+        )
 
     def __repr__(self):
         return f"<DailyLocation: date='{self.date}', method='{self.daily_location_method}', aggregation_unit='{self.aggregation_unit}', subscriber_subset='{self.subscriber_subset}'>"
@@ -73,8 +80,17 @@ class DailyLocationSchema(Schema):
 
 
 class TotalLocationEventsExposed(BaseExposedQuery):
-
-    def __init__(self, *, start_date, end_date, direction, interval, event_types, aggregation_unit, subscriber_subset):
+    def __init__(
+        self,
+        *,
+        start_date,
+        end_date,
+        direction,
+        interval,
+        event_types,
+        aggregation_unit,
+        subscriber_subset,
+    ):
         self.start_str = start_date.strftime("%Y-%m-%d")
         self.stop_str = end_date.strftime("%Y-%m-%d")
         self.direction = direction
@@ -129,6 +145,7 @@ class InvalidQueryKind(Exception):
     """
     Custom exception to indicate an unsupported query kind.
     """
+
 
 def make_query_object(query_kind, params):
     try:
