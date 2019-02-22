@@ -10,7 +10,7 @@ def test_daily_location():
 
     dl_params = {
         'date': '2016-01-01',
-        'method': 'most-common',
+        'daily_location_method': 'most-common',
         'aggregation_unit': 'admin3',
         'subscriber_subset': 'all',
     }
@@ -19,14 +19,14 @@ def test_daily_location():
 
     assert isinstance(dl, DailyLocationExposed)
     assert "2016-01-01" == dl.date.strftime("%Y-%m-%d")
-    assert "most-common" == dl.method
+    assert "most-common" == dl.daily_location_method
     assert "admin3" == dl.aggregation_unit
     assert "all" == dl.subscriber_subset
 
 
 @pytest.mark.parametrize("param_name, invalid_value, expected_error_msg", [
     ("date", "3999-99-99", "Not a valid date"),
-    ("method", "foobar", "Method must be one of"),
+    ("daily_location_method", "foobar", "Method must be one of"),
     ("aggregation_unit", "admin99", "Aggregation unit must be one of"),
     ("subscriber_subset", "<INVALID_SUBSCRIBER>", "Subscriber subset must be one of"),
 ])
@@ -34,7 +34,7 @@ def test_invalid_date_raises_error(param_name, invalid_value, expected_error_msg
     # Start with valid parameters
     params = {
         'date': '2016-01-01',
-        'method': 'most-common',
+        'daily_location_method': 'most-common',
         'aggregation_unit': 'admin3',
         'subscriber_subset': 'all',
     }
