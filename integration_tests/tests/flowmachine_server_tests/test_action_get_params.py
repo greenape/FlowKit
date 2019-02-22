@@ -10,12 +10,14 @@ from .helpers import poll_until_done, send_message_and_get_reply
     "params",
     [
         {
+            "query_kind": "daily_location",
             "date": "2016-01-01",
             "daily_location_method": "last",
             "aggregation_unit": "admin3",
             "subscriber_subset": "all",
         },
         {
+            "query_kind": "daily_location",
             "date": "2016-01-04",
             "daily_location_method": "most-common",
             "aggregation_unit": "admin1",
@@ -29,11 +31,12 @@ async def test_get_params(params, zmq_url):
     Running 'get_params' against an existing query_id returns the expected parameters with which the query was run.
     """
     #
-    # Run daily_location query.
+    # Run the query.
     #
+    query_kind = params.pop("query_kind")
     msg_run_query = {
         "action": "run_query",
-        "query_kind": "daily_location",
+        "query_kind": query_kind,
         "params": params,
         "request_id": "DUMMY_ID",
     }
