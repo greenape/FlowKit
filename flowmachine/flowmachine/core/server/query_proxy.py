@@ -21,7 +21,7 @@ from flowmachine.features import (
     MeaningfulLocationsAggregate,
 )
 from flowmachine.features.utilities.subscriber_locations import subscriber_locations
-from flowmachine.core.server.exposed_queries import make_query_object, ValidationError
+from flowmachine.core.server.exposed_queries import make_query_object
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
@@ -150,7 +150,7 @@ def construct_query_object(query_kind, params):  # pragma: no cover
         event_types = params["event_types"]
 
         allowed_intervals = TotalLocationEvents.allowed_intervals
-        allowed_directions = ["in", "out", "all"]
+        allowed_directions = ["in", "out", "all", "both"]
         allowed_levels = [
             "admin0",
             "admin1",
@@ -447,7 +447,7 @@ class QueryProxy:
                 q_agg.store()
                 query_id = q_agg.md5
             except AttributeError:
-                if isinstance(q, Flows):
+                if isinstance(q, (Flows, TotalLocationEvents)):
                     # A valid AttributeError can happen for flows, which don't support aggregation
                     query_id = q.md5
                 else:

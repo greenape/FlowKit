@@ -1,9 +1,22 @@
 from marshmallow import Schema, fields, post_load, validates, ValidationError
 
-from ...features.subscriber import daily_location
+from ...features import daily_location, TotalLocationEvents
 
 
-class DailyLocationExposed:
+class BaseExposedQuery:
+
+    def store(self, force=False):
+        self.query.store(force=force)
+
+    def aggregate(self):
+        return self.query.aggregate()
+
+    @property
+    def md5(self):
+        return self.query.md5
+
+
+class DailyLocationExposed(BaseExposedQuery):
 
     def __init__(self, *, date, daily_location_method, aggregation_unit, subscriber_subset):
         self.date = date
@@ -16,16 +29,6 @@ class DailyLocationExposed:
 
     def __repr__(self):
         return f"<DailyLocation: date='{self.date}', method='{self.daily_location_method}', aggregation_unit='{self.aggregation_unit}', subscriber_subset='{self.subscriber_subset}'>"
-
-    def store(self, force=False):
-        self.query.store(force=force)
-
-    def aggregate(self):
-        return self.query.aggregate()
-
-    @property
-    def md5(self):
-        return self.query.md5
 
 
 class DailyLocationSchema(Schema):
@@ -53,12 +56,60 @@ class DailyLocationSchema(Schema):
             raise ValidationError(f"Subscriber subset must be one of: {allowed_values}")
 
     @post_load
-    def make_daily_location(self, data):
-        return DailyLocationExposed(**data)
+    def make_daily_location(self, params):
+        return DailyLocationExposed(**params)
+
+
+class TotalLocationEventsExposed(BaseExposedQuery):
+
+    def __init__(self, *, start_date, end_date, direction, interval, event_types, aggregation_unit, subscriber_subset):
+        self.start_str = start_date.strftime("%Y-%m-%d")
+        self.stop_str = end_date.strftime("%Y-%m-%d")
+        self.direction = direction
+        self.interval = interval
+        self.event_types = event_types
+        self.aggregation_unit = aggregation_unit
+        self.subscriber_subset = subscriber_subset
+
+        self.query = TotalLocationEvents(
+            start=self.start_str,
+            stop=self.stop_str,
+            direction=direction,
+            table=event_types,
+            level=aggregation_unit,
+            subscriber_subset=subscriber_subset,
+        )
+
+    def __repr__(self):
+        return (
+            f"<TotalLocationEvents: start_date='{self.start_date}', end_date='{self.end_date}', direction='{self.direction}', "
+            f"event_types={self.event_types}, aggregation_unit='{self.aggregation_unit}', ubscriber_subset='{self.subscriber_subset}'>"
+        )
+
+
+class TotalLocationEventsSchema(Schema):
+    start_date = fields.Date()
+    end_date = fields.Date()
+    direction = fields.String()
+    interval = fields.String()
+    event_types = fields.String()  # TODO: can also be a list of strings!
+    aggregation_unit = fields.String()
+    subscriber_subset = fields.String(default="all", allow_none=True)
+
+    @validates("direction")
+    def validate_direction(self, value):
+        allowed_values = ["in", "out", "both"]
+        if value not in allowed_values:
+            raise ValidationError(f"Direction must be one of: {allowed_values}")
+
+    @post_load
+    def make_query(self, params):
+        return TotalLocationEventsExposed(**params)
 
 
 schemas_of_exposed_queries = {
     "daily_location": DailyLocationSchema,
+    "location_event_counts": TotalLocationEventsSchema,
 }
 
 
