@@ -12,10 +12,20 @@ class DailyLocationExposed:
         self.subscriber_subset = subscriber_subset
 
         date_str = self.date.strftime("%Y-%m-%d")
-        self.daily_location = daily_location(date=date_str, level=self.aggregation_unit, method=self.daily_location_method, subscriber_subset=self.subscriber_subset)
+        self.query = daily_location(date=date_str, level=self.aggregation_unit, method=self.daily_location_method, subscriber_subset=self.subscriber_subset)
 
     def __repr__(self):
         return f"<DailyLocation: date='{self.date}', method='{self.daily_location_method}', aggregation_unit='{self.aggregation_unit}', subscriber_subset='{self.subscriber_subset}'>"
+
+    def store(self, force=False):
+        self.query.store(force=force)
+
+    def aggregate(self):
+        return self.query.aggregate()
+
+    @property
+    def md5(self):
+        return self.query.md5
 
 
 class DailyLocationSchema(Schema):

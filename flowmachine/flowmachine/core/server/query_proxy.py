@@ -137,8 +137,7 @@ def construct_query_object(query_kind, params):  # pragma: no cover
 
     if "daily_location" == query_kind:
         try:
-            q_exposed = make_query_object(query_kind, params)
-            q = q_exposed.query
+            q = make_query_object(query_kind, params)
         except Exception as e:
             raise QueryProxyError(f"{error_msg_prefix}: '{e}'")
     elif "location_event_counts" == query_kind:
