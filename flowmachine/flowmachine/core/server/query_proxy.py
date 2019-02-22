@@ -21,7 +21,7 @@ from flowmachine.features import (
     MeaningfulLocationsAggregate,
 )
 from flowmachine.features.utilities.subscriber_locations import subscriber_locations
-from flowmachine.core.server.exposed_queries import make_query_object
+from flowmachine.core.server.exposed_queries import make_query_object, AggregationError
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
@@ -446,12 +446,14 @@ class QueryProxy:
                 q_agg = q.aggregate()
                 q_agg.store()
                 query_id = q_agg.md5
-            except AttributeError:
-                if isinstance(q, (Flows, TotalLocationEvents)):
-                    # A valid AttributeError can happen for flows, which don't support aggregation
+            except AggregationError as exc:
+                if isinstance(q, Flows):
+                    # A valid AggregationError can happen for flows, which don't support aggregation
                     query_id = q.md5
                 else:
-                    raise
+                    raise QueryProxyError(exc)
+            except Exception as exc:
+                raise QueryProxyError(exc)
             self._create_redis_lookup(query_id)
             logger.debug(f"Triggered store for query {query_id}")
 

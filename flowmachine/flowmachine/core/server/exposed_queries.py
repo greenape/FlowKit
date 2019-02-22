@@ -1,6 +1,15 @@
+import logging
 from marshmallow import Schema, fields, post_load, validates, ValidationError
 
 from ...features import daily_location, TotalLocationEvents
+
+logger = logging.getLogger("flowmachine").getChild(__name__)
+
+
+class AggregationError(Exception):
+    """
+    Custom exception to indicate that a query does not support aggregation.
+    """
 
 
 class BaseExposedQuery:
@@ -9,7 +18,10 @@ class BaseExposedQuery:
         self.query.store(force=force)
 
     def aggregate(self):
-        return self.query.aggregate()
+        try:
+            return self.query.aggregate()
+        except AttributeError:
+            raise AggregationError(f"Query does not support aggregation: {type(self.query)}")
 
     @property
     def md5(self):
@@ -125,4 +137,5 @@ def make_query_object(query_kind, params):
         raise InvalidQueryKind()
 
     obj = schema_cls().load(params)
+    logger.debug(f"Made query of kind '{query_kind}' with parameters: {params}")
     return obj
