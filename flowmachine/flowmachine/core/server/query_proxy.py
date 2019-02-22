@@ -137,8 +137,9 @@ def construct_query_object(query_kind, params):  # pragma: no cover
 
     if "daily_location" == query_kind:
         try:
-            return make_query_object(query_kind, params)
-        except ValidationError as e:
+            q_exposed = make_query_object(query_kind, params)
+            q = q_exposed.query
+        except Exception as e:
             raise QueryProxyError(f"{error_msg_prefix}: '{e}'")
     elif "location_event_counts" == query_kind:
         start_date = params["start_date"]
