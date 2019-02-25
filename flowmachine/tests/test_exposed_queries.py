@@ -32,12 +32,12 @@ def test_daily_location():
     "param_name, invalid_value, expected_error_msg",
     [
         ("date", "3999-99-99", "Not a valid date"),
-        ("daily_location_method", "foobar", "Method must be one of"),
-        ("aggregation_unit", "admin99", "Aggregation unit must be one of"),
+        ("daily_location_method", "foobar", "{'daily_location_method': \['Not a valid choice.'\]}"),
+        ("aggregation_unit", "admin99", "{'aggregation_unit': \['Not a valid choice.'\]}"),
         (
             "subscriber_subset",
             "<INVALID_SUBSCRIBER>",
-            "Subscriber subset must be one of",
+            "{'subscriber_subset': \['Not a valid choice.'\]}",
         ),
     ],
 )
