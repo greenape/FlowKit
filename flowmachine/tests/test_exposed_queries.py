@@ -2,9 +2,9 @@ import pytest
 
 from flowmachine.core.server.exposed_queries.exposed_queries import (
     make_query_object,
-    DailyLocationExposed,
-    ValidationError,
+    QueryParamsValidationError,
 )
+from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
 
 
 def test_daily_location():
@@ -54,5 +54,5 @@ def test_invalid_date_raises_error(param_name, invalid_value, expected_error_msg
     params[param_name] = invalid_value
 
     # Confirm that the invalid parameter causes the expeted error
-    with pytest.raises(ValidationError, match=expected_error_msg):
+    with pytest.raises(QueryParamsValidationError, match=expected_error_msg):
         make_query_object("daily_location", params)

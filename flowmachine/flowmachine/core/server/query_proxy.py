@@ -20,7 +20,8 @@ from flowmachine.features import (
     MeaningfulLocationsAggregate,
 )
 from flowmachine.features.utilities.subscriber_locations import subscriber_locations
-from flowmachine.core.server.exposed_queries.exposed_queries import make_query_object, AggregationError
+from flowmachine.core.server.exposed_queries.exposed_queries import make_query_object
+from flowmachine.core.server.exposed_queries.base import AggregationError
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
