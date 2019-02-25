@@ -47,7 +47,7 @@ class DailyLocationExposed(BaseExposedQuery):
         )
 
     def __repr__(self):
-        return f"<DailyLocation: date='{self.date}', method='{self.daily_location_method}', aggregation_unit='{self.aggregation_unit}', subscriber_subset='{self.subscriber_subset}'>"
+        return f"<DailyLocationExposed: date='{self.date}', method='{self.daily_location_method}', aggregation_unit='{self.aggregation_unit}', subscriber_subset='{self.subscriber_subset}'>"
 
 
 class DailyLocationSchema(Schema):
@@ -110,7 +110,7 @@ class TotalLocationEventsExposed(BaseExposedQuery):
 
     def __repr__(self):
         return (
-            f"<TotalLocationEvents: start_date='{self.start_date}', end_date='{self.end_date}', direction='{self.direction}', "
+            f"<TotalLocationEventsExposed: start_date='{self.start_date}', end_date='{self.end_date}', direction='{self.direction}', "
             f"event_types={self.event_types}, aggregation_unit='{self.aggregation_unit}', ubscriber_subset='{self.subscriber_subset}'>"
         )
 
