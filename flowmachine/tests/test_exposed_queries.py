@@ -1,6 +1,6 @@
 import pytest
 
-from flowmachine.core.server.exposed_queries import (
+from flowmachine.core.server.exposed_queries.exposed_queries import (
     make_query_object,
     DailyLocationExposed,
     ValidationError,

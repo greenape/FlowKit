@@ -1,7 +1,7 @@
 import logging
 from marshmallow import Schema, fields, post_load, validates, ValidationError
 
-from ...features import daily_location, TotalLocationEvents
+from flowmachine.features import daily_location, TotalLocationEvents
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
