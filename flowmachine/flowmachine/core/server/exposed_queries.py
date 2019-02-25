@@ -91,6 +91,10 @@ class TotalLocationEventsExposed(BaseExposedQuery):
         aggregation_unit,
         subscriber_subset,
     ):
+        # TODO: disallow direction="all" in favour of direction="both"
+        if direction == "all":
+            direction = "both"
+
         self.start_str = start_date.strftime("%Y-%m-%d")
         self.stop_str = end_date.strftime("%Y-%m-%d")
         self.direction = direction
@@ -126,7 +130,7 @@ class TotalLocationEventsSchema(Schema):
 
     @validates("direction")
     def validate_direction(self, value):
-        allowed_values = ["in", "out", "both"]
+        allowed_values = ["in", "out", "both", "all"]
         if value not in allowed_values:
             raise ValidationError(f"Direction must be one of: {allowed_values}")
 
