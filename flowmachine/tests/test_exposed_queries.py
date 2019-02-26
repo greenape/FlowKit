@@ -5,7 +5,7 @@ from flowmachine.core.server.exposed_queries.exposed_queries import (
     QueryParamsValidationError,
 )
 from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
-from flowmachine.core.server.exposed_queries.total_location_events import LocationEventCountsExposed
+from flowmachine.core.server.exposed_queries.location_event_counts import LocationEventCountsExposed
 
 
 def test_daily_location():

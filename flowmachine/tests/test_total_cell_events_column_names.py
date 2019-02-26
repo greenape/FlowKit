@@ -8,7 +8,7 @@ Test column_names property of  _TotalCellEvents
 
 import pytest
 
-from flowmachine.features.location.total_events import (
+from flowmachine.features.location.location_event_counts import (
     LocationEventCounts,
     _TotalCellEvents,
 )

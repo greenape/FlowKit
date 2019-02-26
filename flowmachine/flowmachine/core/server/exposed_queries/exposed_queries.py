@@ -2,7 +2,7 @@ import logging
 import marshmallow
 
 from .daily_location import DailyLocationSchema
-from .total_location_events import LocationEventCountsSchema
+from .location_event_counts import LocationEventCountsSchema
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
