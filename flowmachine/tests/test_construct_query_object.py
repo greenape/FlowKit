@@ -10,7 +10,7 @@ from flowmachine.core.server.query_proxy import (
     InvalidGeographyError,
 )
 from flowmachine.core import GeoTable
-from flowmachine.features import LastLocation, ModalLocation, Flows, TotalLocationEvents
+from flowmachine.features import LastLocation, ModalLocation, Flows, LocationEventCounts
 
 
 @pytest.mark.parametrize(
@@ -622,8 +622,8 @@ def test_wrong_geography_aggregation_unit_raises_error():
             },
         ),
         (
-            TotalLocationEvents,
-            {
+                LocationEventCounts,
+                {
                 "query_kind": "location_event_counts",
                 "params": {
                     "start_date": "2016-01-01",

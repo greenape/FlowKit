@@ -40,10 +40,10 @@ class _TotalCellEvents(Query):
         self.interval = interval
         self.direction = direction
 
-        if self.interval not in TotalLocationEvents.allowed_intervals:
+        if self.interval not in LocationEventCounts.allowed_intervals:
             raise ValueError(
                 "'Interval must be one of: {} got: {}".format(
-                    TotalLocationEvents.allowed_intervals, self.interval
+                    LocationEventCounts.allowed_intervals, self.interval
                 )
             )
 
@@ -122,7 +122,7 @@ class _TotalCellEvents(Query):
         return sql
 
 
-class TotalLocationEvents(GeoDataMixin, Query):
+class LocationEventCounts(GeoDataMixin, Query):
     """
     Calculates the total number of events on an hourly basis
     per location (such as a tower or admin region),

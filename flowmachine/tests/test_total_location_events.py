@@ -7,15 +7,15 @@ Tests for the spatial activity class
 """
 import pytest
 
-from flowmachine.features import TotalLocationEvents
+from flowmachine.features import LocationEventCounts
 
 
 @pytest.mark.usefixtures("skip_datecheck")
-@pytest.mark.parametrize("interval", TotalLocationEvents.allowed_intervals)
+@pytest.mark.parametrize("interval", LocationEventCounts.allowed_intervals)
 @pytest.mark.parametrize("direction", ["in", "out", "both"])
 def test_total_location_events_column_names(exemplar_level_param, interval, direction):
-    """ Test that column_names property of TotalLocationEvents matches head(0)"""
-    tle = TotalLocationEvents(
+    """ Test that column_names property of LocationEventCounts matches head(0)"""
+    tle = LocationEventCounts(
         "2016-01-01",
         "2016-01-04",
         **exemplar_level_param,
@@ -27,10 +27,10 @@ def test_total_location_events_column_names(exemplar_level_param, interval, dire
 
 def test_events_at_cell_level(get_dataframe):
     """
-    TotalLocationEvents() returns data at the level of the cell.
+    LocationEventCounts() returns data at the level of the cell.
     """
 
-    te = TotalLocationEvents("2016-01-01", "2016-01-04", level="versioned-site")
+    te = LocationEventCounts("2016-01-01", "2016-01-04", level="versioned-site")
     df = get_dataframe(te)
 
     # Test one of the values
@@ -43,9 +43,9 @@ def test_events_at_cell_level(get_dataframe):
 
 def test_ignore_texts(get_dataframe):
     """
-    TotalLocationEvents() can get the total activity at cell level excluding texts.
+    LocationEventCounts() can get the total activity at cell level excluding texts.
     """
-    te = TotalLocationEvents(
+    te = LocationEventCounts(
         "2016-01-01", "2016-01-04", level="versioned-site", tables="events.calls"
     )
     df = get_dataframe(te)
@@ -60,9 +60,9 @@ def test_ignore_texts(get_dataframe):
 
 def test_only_incoming(get_dataframe):
     """
-    TotalLocationEvents() can get activity, ignoring outgoing calls.
+    LocationEventCounts() can get activity, ignoring outgoing calls.
     """
-    te = TotalLocationEvents(
+    te = LocationEventCounts(
         "2016-01-01", "2016-01-04", level="versioned-site", direction="in"
     )
     df = get_dataframe(te)
@@ -76,9 +76,9 @@ def test_only_incoming(get_dataframe):
 
 def test_events_daily(get_dataframe):
     """
-    TotalLocationEvents() can get activity on a daily level.
+    LocationEventCounts() can get activity on a daily level.
     """
-    te = TotalLocationEvents(
+    te = LocationEventCounts(
         "2016-01-01", "2016-01-04", level="versioned-site", interval="day"
     )
     df = get_dataframe(te)
@@ -91,9 +91,9 @@ def test_events_daily(get_dataframe):
 
 def test_events_min(get_dataframe):
     """
-    TotalLocationEvents() can get events on a min-by-min basis.
+    LocationEventCounts() can get events on a min-by-min basis.
     """
-    te = TotalLocationEvents(
+    te = LocationEventCounts(
         "2016-01-01", "2016-01-04", level="versioned-site", interval="min"
     )
     df = get_dataframe(te)
@@ -114,7 +114,7 @@ def test_events_min(get_dataframe):
 def test_bad_direction_raises_error():
     """Total location events raises an error for a bad direction."""
     with pytest.raises(ValueError):
-        TotalLocationEvents(
+        LocationEventCounts(
             "2016-01-01",
             "2016-01-04",
             level="versioned-site",
@@ -126,6 +126,6 @@ def test_bad_direction_raises_error():
 def test_bad_interval_raises_error():
     """Total location events raises an error for a bad interval."""
     with pytest.raises(ValueError):
-        TotalLocationEvents(
+        LocationEventCounts(
             "2016-01-01", "2016-01-04", level="versioned-site", interval="BAD_INTERVAL"
         )

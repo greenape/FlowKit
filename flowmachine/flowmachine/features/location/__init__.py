@@ -9,13 +9,13 @@ of subscribers at a given location.
 
 """
 from .flows import Flows
-from .total_events import TotalLocationEvents
+from .total_events import LocationEventCounts
 from .location_introversion import LocationIntroversion
 from .unique_subscriber_counts import UniqueSubscriberCounts
 
 
 __all__ = [
-    "TotalLocationEvents",
+    "LocationEventCounts",
     "Flows",
     "UniqueSubscriberCounts",
     "LocationIntroversion",

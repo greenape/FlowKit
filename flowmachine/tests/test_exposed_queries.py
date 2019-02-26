@@ -5,7 +5,7 @@ from flowmachine.core.server.exposed_queries.exposed_queries import (
     QueryParamsValidationError,
 )
 from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
-from flowmachine.core.server.exposed_queries.total_location_events import TotalLocationEventsExposed
+from flowmachine.core.server.exposed_queries.total_location_events import LocationEventCountsExposed
 
 
 def test_daily_location():
@@ -76,7 +76,7 @@ def test_location_event_counts():
 
     q = make_query_object("location_event_counts", params)
 
-    assert isinstance(q, TotalLocationEventsExposed)
+    assert isinstance(q, LocationEventCountsExposed)
     assert "2016-01-01" == q.start_date.strftime("%Y-%m-%d")
     assert "2016-01-04" == q.end_date.strftime("%Y-%m-%d")
     assert "out" == q.direction

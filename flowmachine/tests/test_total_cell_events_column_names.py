@@ -9,13 +9,13 @@ Test column_names property of  _TotalCellEvents
 import pytest
 
 from flowmachine.features.location.total_events import (
-    TotalLocationEvents,
+    LocationEventCounts,
     _TotalCellEvents,
 )
 
 
 @pytest.mark.usefixtures("skip_datecheck")
-@pytest.mark.parametrize("interval", TotalLocationEvents.allowed_intervals)
+@pytest.mark.parametrize("interval", LocationEventCounts.allowed_intervals)
 @pytest.mark.parametrize("direction", ["in", "out", "both"])
 def test_total_cell_events_column_names(interval, direction):
     """ Test that column_names property of _TotalCellEvents matches head(0)"""
