@@ -5,6 +5,7 @@ from flowmachine.core.server.exposed_queries.exposed_queries import (
     QueryParamsValidationError,
 )
 from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
+from flowmachine.core.server.exposed_queries.total_location_events import TotalLocationEventsExposed
 
 
 def test_daily_location():
@@ -56,3 +57,30 @@ def test_invalid_date_raises_error(param_name, invalid_value, expected_error_msg
     # Confirm that the invalid parameter causes the expected error
     with pytest.raises(QueryParamsValidationError, match=expected_error_msg):
         make_query_object("daily_location", params)
+
+
+def test_location_event_counts():
+    """
+    Can successfully construct a total location events object from valid parameters.
+    """
+
+    params = {
+        "start_date": "2016-01-01",
+        "end_date": "2016-01-04",
+        "direction": "out",
+        "interval": "hour",
+        "event_types": None,
+        "aggregation_unit": "admin3",
+        "subscriber_subset": "all",
+    }
+
+    q = make_query_object("location_event_counts", params)
+
+    assert isinstance(q, TotalLocationEventsExposed)
+    assert "2016-01-01" == q.start_date.strftime("%Y-%m-%d")
+    assert "2016-01-04" == q.end_date.strftime("%Y-%m-%d")
+    assert "out" == q.direction
+    assert "hour" == q.interval
+    assert None == q.event_types
+    assert "admin3" == q.aggregation_unit
+    assert "all" == q.subscriber_subset
