@@ -53,6 +53,6 @@ def test_invalid_date_raises_error(param_name, invalid_value, expected_error_msg
     # Replace one of the parameters with an invalid valie
     params[param_name] = invalid_value
 
-    # Confirm that the invalid parameter causes the expeted error
+    # Confirm that the invalid parameter causes the expected error
     with pytest.raises(QueryParamsValidationError, match=expected_error_msg):
         make_query_object("daily_location", params)
