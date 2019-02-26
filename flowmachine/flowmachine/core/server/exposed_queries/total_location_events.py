@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields, validates, ValidationError, post_load
+from marshmallow.validate import OneOf
 
 from .base import BaseExposedQuery
 from ....features import TotalLocationEvents
@@ -50,11 +51,11 @@ class TotalLocationEventsExposed(BaseExposedQuery):
 class TotalLocationEventsSchema(Schema):
     start_date = fields.Date()
     end_date = fields.Date()
-    direction = fields.String()
-    interval = fields.String()
+    direction = fields.String(validate=OneOf(["in", "out", "both", "all"]))
+    interval = fields.String(TotalLocationEvents.allowed_intervals)
     event_types = fields.String()  # TODO: can also be a list of strings!
-    aggregation_unit = fields.String()
-    subscriber_subset = fields.String(default="all", allow_none=True)
+    aggregation_unit = fields.String(validate=OneOf(["admin0", "admin1", "admin2", "admin3"]))
+    subscriber_subset = fields.String(default="all", allow_none=True, validate=OneOf(["all"]))
 
     @validates("direction")
     def validate_direction(self, value):
