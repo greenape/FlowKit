@@ -194,7 +194,6 @@ class TotalLocationEvents(GeoDataMixin, Query):
 
         self.start = start
         self.stop = stop
-        self.tables = tables
         self.level = level
         self.interval = interval
         self.direction = direction
