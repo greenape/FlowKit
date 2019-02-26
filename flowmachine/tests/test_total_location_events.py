@@ -46,7 +46,7 @@ def test_ignore_texts(get_dataframe):
     TotalLocationEvents() can get the total activity at cell level excluding texts.
     """
     te = TotalLocationEvents(
-        "2016-01-01", "2016-01-04", level="versioned-site", table="events.calls"
+        "2016-01-01", "2016-01-04", level="versioned-site", tables="events.calls"
     )
     df = get_dataframe(te)
 
