@@ -1,5 +1,5 @@
-from marshmallow import Schema, fields, validates, ValidationError, post_load
-from marshmallow.validate import OneOf
+from marshmallow import Schema, fields, post_load
+from marshmallow.validate import OneOf, Length
 
 from .base import BaseExposedQuery
 from ....features import TotalLocationEvents
@@ -32,11 +32,16 @@ class TotalLocationEventsExposed(BaseExposedQuery):
         self.aggregation_unit = aggregation_unit
         self.subscriber_subset = subscriber_subset
 
+        if event_types is None or event_types == []:
+            tables = "all"
+        else:
+            tables = [f"events.{event_type}" for event_type in self.event_types]
+
         self.query = TotalLocationEvents(
             start=self.start_str,
             stop=self.stop_str,
             direction=direction,
-            table=event_types,
+            tables=tables,
             level=aggregation_unit,
             subscriber_subset=subscriber_subset,
         )
@@ -53,15 +58,9 @@ class TotalLocationEventsSchema(Schema):
     end_date = fields.Date()
     direction = fields.String(validate=OneOf(["in", "out", "both", "all"]))
     interval = fields.String(TotalLocationEvents.allowed_intervals)
-    event_types = fields.String()  # TODO: can also be a list of strings!
+    event_types = fields.List(fields.String(), allow_none=True, validate=Length(min=1))
     aggregation_unit = fields.String(validate=OneOf(["admin0", "admin1", "admin2", "admin3"]))
     subscriber_subset = fields.String(default="all", allow_none=True, validate=OneOf(["all"]))
-
-    @validates("direction")
-    def validate_direction(self, value):
-        allowed_values = ["in", "out", "both", "all"]
-        if value not in allowed_values:
-            raise ValidationError(f"Direction must be one of: {allowed_values}")
 
     @post_load
     def make_query(self, params):
