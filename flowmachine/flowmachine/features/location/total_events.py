@@ -134,10 +134,9 @@ class TotalLocationEvents(GeoDataMixin, Query):
         ISO format date string to at which to start the analysis
     stop : str
         As above for the end of the analysis
-    table : str, default 'all'
-        Specifies a table of cdr data on which to base the analysis. Table must
-        exist in events schema. If 'all' then we use all tables specified in
-        flowmachine.yml.
+    tables : str or list of strings, default 'all'
+        Can be a string of a single table (with the schema) or a list of these.
+        The keyword 'all' indicates all subscriber tables.
     level : str
         Levels can be one of:
             'cell':

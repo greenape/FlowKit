@@ -25,9 +25,8 @@ class EventsTablesUnion(Query):
     columns :
         list of columns to select
     tables : str or list of strings, default 'all'
-        Can be a sting of a single table (with the schema)
-        or a list of these. The keyword all is to select all
-        subscriber tables
+        Can be a string of a single table (with the schema) or a list of these.
+        The keyword 'all' indicates all subscriber tables.
     subscriber_identifier : {'msisdn', 'imei'}, default 'msisdn'
         Either msisdn, or imei, the column that identifies the subscriber.
     subscriber_subset : str, list, flowmachine.core.Query, flowmachine.core.Table, default None
