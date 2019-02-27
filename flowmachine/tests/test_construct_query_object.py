@@ -29,7 +29,7 @@ from flowmachine.features import LastLocation, ModalLocation, Flows, LocationEve
             },
         ),
         (
-            "7d849689acdfba7266e3b9e83e56ba55",
+            "95342145202c58cad2c7ec06e7921b61",
             {
                 "query_kind": "location_event_counts",
                 "params": {
