@@ -29,7 +29,7 @@ from flowmachine.features import LastLocation, ModalLocation, Flows, LocationEve
             },
         ),
         (
-            "cc13f4c70a59b25a61192583132c1efe",
+            "7d849689acdfba7266e3b9e83e56ba55",
             {
                 "query_kind": "location_event_counts",
                 "params": {
@@ -38,7 +38,7 @@ from flowmachine.features import LastLocation, ModalLocation, Flows, LocationEve
                     "interval": "day",
                     "aggregation_unit": "admin3",
                     "direction": "all",
-                    "event_types": "all",
+                    "event_types": None,
                     "subscriber_subset": "all",
                 },
             },
@@ -631,7 +631,7 @@ def test_wrong_geography_aggregation_unit_raises_error():
                     "interval": "day",
                     "aggregation_unit": "admin3",
                     "direction": "all",
-                    "event_types": "all",
+                    "event_types": None,
                     "subscriber_subset": "all",
                 },
             },
