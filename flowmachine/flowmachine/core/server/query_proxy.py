@@ -1,5 +1,6 @@
 import logging
 from copy import deepcopy
+from unittest.mock import Mock
 
 import redis
 import redis_lock
@@ -401,8 +402,9 @@ class QueryProxy:
                 q_agg.store()
                 query_id = q_agg.md5
             except AggregationError as exc:
-                if isinstance(q, Flows):
-                    # A valid AggregationError can happen for flows, which don't support aggregation
+                if isinstance(q, (Flows, Mock)):
+                    # A valid AggregationError can happen for flows, which don't support aggregation,
+                    # or for mock objects during testing.
                     query_id = q.md5
                 else:
                     raise QueryProxyError(exc)

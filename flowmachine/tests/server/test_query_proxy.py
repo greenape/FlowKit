@@ -2,8 +2,25 @@ import pytest
 from unittest.mock import Mock
 
 from flowmachine.core.server.query_proxy import QueryProxy, QueryProxyError
+from flowmachine.core.server.exposed_queries.base import AggregationError
 from flowmachine.core.query import Query
 from flowmachine.features import daily_location
+
+
+def MockQuery():
+    """
+    Return Mock object which raises an AggregationError when aggregate() is called on it.
+    TODO: This is only needed while we do aggregation in QueryProxy.run_query_async(),
+          which should be removed asap. Once this is done we can remove this class and
+          simply instantiate mock objects with 'Mock(spec=Query)' in the tests below.
+    """
+
+    def mock_aggregate():
+        raise AggregationError("Mock object does not support aggregation")
+
+    q = Mock(spec=Query)
+    q.aggregate = mock_aggregate
+    return q
 
 
 def test_construct_query_proxy():
@@ -86,7 +103,7 @@ def test_poll(dummy_redis, monkeypatch):
     # Define mock query object and a function which returns it when called.
     # This serves as a drop-in replacement for 'construct_query_object' in
     # flowmachine.core.server.query_proxy.
-    q = Mock(spec=Query)
+    q = MockQuery()
     q.md5 = "dummy_query_id"
 
     mock_func_cache_table_exists = Mock()
@@ -137,7 +154,7 @@ def test_get_sql(dummy_redis, monkeypatch):
     # Define mock query object and a function which returns it when called.
     # This serves as a drop-in replacement for 'construct_query_object' in
     # flowmachine.core.server.query_proxy.
-    q = Mock(spec=Query)
+    q = MockQuery()
 
     def dummy_construct_query_object(query_kind, params):
         return q
