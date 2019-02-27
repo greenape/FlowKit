@@ -35,22 +35,19 @@ class _TotalCellEvents(Query):
         subscriber_subset=None,
         subscriber_identifier="msisdn",
     ):
-        self.start = start
-        self.stop = stop
-        self.interval = interval
         self.direction = direction
 
-        if self.interval not in LocationEventCounts.allowed_intervals:
+        if interval not in LocationEventCounts.allowed_intervals:
             raise ValueError(
                 "'Interval must be one of: {} got: {}".format(
-                    LocationEventCounts.allowed_intervals, self.interval
+                    LocationEventCounts.allowed_intervals, interval
                 )
             )
 
         self.time_cols = ["(datetime::date)::text AS date"]
-        if self.interval == "hour" or self.interval == "min":
+        if interval == "hour" or interval == "min":
             self.time_cols.append("extract(hour FROM datetime) AS hour")
-        if self.interval == "min":
+        if interval == "min":
             self.time_cols.append("extract(minute FROM datetime) AS min")
 
         self.cols = ["location_id", "datetime"]
@@ -67,8 +64,8 @@ class _TotalCellEvents(Query):
         # columns, plus the cell column
         self.groups = [x.split(" AS ")[0] for x in self.time_cols + ["location_id"]]
         self.unioned = EventsTablesUnion(
-            self.start,
-            self.stop,
+            start,
+            stop,
             tables=tables,
             columns=self.cols,
             hours=hours,
@@ -192,11 +189,8 @@ class LocationEventCounts(GeoDataMixin, Query):
         geom_col="geom",
     ):
 
-        self.start = start
-        self.stop = stop
         self.level = level
         self.interval = interval
-        self.direction = direction
         self.column_name = column_name
 
         if self.interval not in self.allowed_intervals:
