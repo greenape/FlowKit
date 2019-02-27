@@ -5,7 +5,9 @@ from flowmachine.core.server.exposed_queries.exposed_queries import (
     QueryParamsValidationError,
 )
 from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
-from flowmachine.core.server.exposed_queries.location_event_counts import LocationEventCountsExposed
+from flowmachine.core.server.exposed_queries.location_event_counts import (
+    LocationEventCountsExposed,
+)
 
 
 def test_daily_location():
@@ -33,8 +35,16 @@ def test_daily_location():
     "param_name, invalid_value, expected_error_msg",
     [
         ("date", "3999-99-99", "Not a valid date"),
-        ("daily_location_method", "foobar", "{'daily_location_method': \['Not a valid choice.'\]}"),
-        ("aggregation_unit", "admin99", "{'aggregation_unit': \['Not a valid choice.'\]}"),
+        (
+            "daily_location_method",
+            "foobar",
+            "{'daily_location_method': \['Not a valid choice.'\]}",
+        ),
+        (
+            "aggregation_unit",
+            "admin99",
+            "{'aggregation_unit': \['Not a valid choice.'\]}",
+        ),
         (
             "subscriber_subset",
             "<INVALID_SUBSCRIBER>",

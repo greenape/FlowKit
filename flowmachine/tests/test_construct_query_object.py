@@ -622,8 +622,8 @@ def test_wrong_geography_aggregation_unit_raises_error():
             },
         ),
         (
-                LocationEventCounts,
-                {
+            LocationEventCounts,
+            {
                 "query_kind": "location_event_counts",
                 "params": {
                     "start_date": "2016-01-01",

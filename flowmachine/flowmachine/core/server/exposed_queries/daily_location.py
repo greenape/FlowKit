@@ -29,8 +29,12 @@ class DailyLocationExposed(BaseExposedQuery):
 class DailyLocationSchema(Schema):
     date = fields.Date()
     daily_location_method = fields.String(validate=OneOf(["last", "most-common"]))
-    aggregation_unit = fields.String(validate=OneOf(["admin0", "admin1", "admin2", "admin3"]))
-    subscriber_subset = fields.String(default="all", allow_none=True, validate=OneOf(["all"]))
+    aggregation_unit = fields.String(
+        validate=OneOf(["admin0", "admin1", "admin2", "admin3"])
+    )
+    subscriber_subset = fields.String(
+        default="all", allow_none=True, validate=OneOf(["all"])
+    )
 
     @post_load
     def make_daily_location(self, params):

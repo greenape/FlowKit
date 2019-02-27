@@ -24,7 +24,7 @@ class LocationEventCountsExposed(BaseExposedQuery):
         # TODO: make the naming of stop/end consistent (or rather, factor this out into some DateRange or DatePeriod class)
         self.start_date = start_date
         self.end_date = end_date
-        self.start_str =start_date.strftime("%Y-%m-%d")
+        self.start_str = start_date.strftime("%Y-%m-%d")
         self.stop_str = end_date.strftime("%Y-%m-%d")
         self.direction = direction
         self.interval = interval
@@ -59,8 +59,12 @@ class LocationEventCountsSchema(Schema):
     direction = fields.String(validate=OneOf(["in", "out", "both", "all"]))
     interval = fields.String(LocationEventCounts.allowed_intervals)
     event_types = fields.List(fields.String(), allow_none=True, validate=Length(min=1))
-    aggregation_unit = fields.String(validate=OneOf(["admin0", "admin1", "admin2", "admin3"]))
-    subscriber_subset = fields.String(default="all", allow_none=True, validate=OneOf(["all"]))
+    aggregation_unit = fields.String(
+        validate=OneOf(["admin0", "admin1", "admin2", "admin3"])
+    )
+    subscriber_subset = fields.String(
+        default="all", allow_none=True, validate=OneOf(["all"])
+    )
 
     @post_load
     def make_query(self, params):
