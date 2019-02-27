@@ -4,6 +4,8 @@ from marshmallow.validate import OneOf, Length
 from .base import BaseExposedQuery
 from ....features import LocationEventCounts
 
+__all__ = ["LocationEventCountsExposed", "LocationEventCountsSchema"]
+
 
 class LocationEventCountsExposed(BaseExposedQuery):
     def __init__(

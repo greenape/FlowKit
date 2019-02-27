@@ -3,6 +3,7 @@ import marshmallow
 
 from .daily_location import DailyLocationSchema
 from .location_event_counts import LocationEventCountsSchema
+from .subscriber_locations import SubscriberLocationsSchema
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
@@ -10,6 +11,7 @@ logger = logging.getLogger("flowmachine").getChild(__name__)
 schemas_of_exposed_queries = {
     "daily_location": DailyLocationSchema,
     "location_event_counts": LocationEventCountsSchema,
+    "subscriber_locations": SubscriberLocationsSchema,
 }
 
 

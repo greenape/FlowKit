@@ -4,10 +4,7 @@ from flowmachine.core.server.exposed_queries.exposed_queries import (
     make_query_object,
     QueryParamsValidationError,
 )
-from flowmachine.core.server.exposed_queries.daily_location import DailyLocationExposed
-from flowmachine.core.server.exposed_queries.location_event_counts import (
-    LocationEventCountsExposed,
-)
+from flowmachine.core.server.exposed_queries import *
 
 
 def test_daily_location():
@@ -94,3 +91,17 @@ def test_location_event_counts():
     assert None == q.event_types
     assert "admin3" == q.aggregation_unit
     assert "all" == q.subscriber_subset
+
+
+def test_subscriber_locations():
+    """
+    Can successfully construct a total location events object from valid parameters.
+    """
+
+    params = {"start": "2016-01-01", "stop": "2016-01-04"}
+
+    q = make_query_object("subscriber_locations", params)
+
+    assert isinstance(q, SubscriberLocationsExposed)
+    assert "2016-01-01" == q.start_date.strftime("%Y-%m-%d")
+    assert "2016-01-04" == q.stop_date.strftime("%Y-%m-%d")

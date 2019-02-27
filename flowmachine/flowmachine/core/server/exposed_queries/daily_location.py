@@ -4,6 +4,8 @@ from marshmallow.validate import OneOf
 from .base import BaseExposedQuery
 from ....features import daily_location
 
+__all__ = ["DailyLocationExposed", "DailyLocationSchema"]
+
 
 class DailyLocationExposed(BaseExposedQuery):
     def __init__(
