@@ -7,6 +7,7 @@ from .subscriber_locations import SubscriberLocationsSchema
 
 logger = logging.getLogger("flowmachine").getChild(__name__)
 
+__all__ = ["InvalidQueryKind", "QueryParamsValidationError", "make_query_object"]
 
 schemas_of_exposed_queries = {
     "daily_location": DailyLocationSchema,
