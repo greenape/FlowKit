@@ -69,7 +69,7 @@ def test_location_event_counts():
 
     params = {
         "start_date": "2016-01-01",
-        "end_date": "2016-01-04",
+        "stop_date": "2016-01-04",
         "direction": "out",
         "interval": "hour",
         "event_types": None,
@@ -81,7 +81,7 @@ def test_location_event_counts():
 
     assert isinstance(q, LocationEventCountsExposed)
     assert "2016-01-01" == q.start_date.strftime("%Y-%m-%d")
-    assert "2016-01-04" == q.end_date.strftime("%Y-%m-%d")
+    assert "2016-01-04" == q.stop_date.strftime("%Y-%m-%d")
     assert "out" == q.direction
     assert "hour" == q.interval
     assert None == q.event_types

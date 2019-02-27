@@ -34,7 +34,7 @@ from flowmachine.features import LastLocation, ModalLocation, Flows, LocationEve
                 "query_kind": "location_event_counts",
                 "params": {
                     "start_date": "2016-01-01",
-                    "end_date": "2016-01-02",
+                    "stop_date": "2016-01-02",
                     "interval": "day",
                     "aggregation_unit": "admin3",
                     "direction": "all",
@@ -627,7 +627,7 @@ def test_wrong_geography_aggregation_unit_raises_error():
                 "query_kind": "location_event_counts",
                 "params": {
                     "start_date": "2016-01-01",
-                    "end_date": "2016-01-02",
+                    "stop_date": "2016-01-02",
                     "interval": "day",
                     "aggregation_unit": "admin3",
                     "direction": "all",

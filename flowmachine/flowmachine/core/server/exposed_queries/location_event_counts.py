@@ -12,7 +12,7 @@ class LocationEventCountsExposed(BaseExposedQuery):
         self,
         *,
         start_date,
-        end_date,
+        stop_date,
         direction,
         interval,
         event_types,
@@ -23,11 +23,10 @@ class LocationEventCountsExposed(BaseExposedQuery):
         if direction == "all":
             direction = "both"
 
-        # TODO: make the naming of stop/end consistent (or rather, factor this out into some DateRange or DatePeriod class)
         self.start_date = start_date
-        self.end_date = end_date
+        self.stop_date = stop_date
         self.start_str = start_date.strftime("%Y-%m-%d")
-        self.stop_str = end_date.strftime("%Y-%m-%d")
+        self.stop_str = stop_date.strftime("%Y-%m-%d")
         self.direction = direction
         self.interval = interval
         self.event_types = event_types
@@ -50,14 +49,14 @@ class LocationEventCountsExposed(BaseExposedQuery):
 
     def __repr__(self):
         return (
-            f"<LocationEventCountsExposed: start_date='{self.start_date}', end_date='{self.end_date}', direction='{self.direction}', "
+            f"<LocationEventCountsExposed: start_date='{self.start_date}', stop_date='{self.stop_date}', direction='{self.direction}', "
             f"event_types={self.event_types}, aggregation_unit='{self.aggregation_unit}', ubscriber_subset='{self.subscriber_subset}'>"
         )
 
 
 class LocationEventCountsSchema(Schema):
     start_date = fields.Date()
-    end_date = fields.Date()
+    stop_date = fields.Date()
     direction = fields.String(validate=OneOf(["in", "out", "both", "all"]))
     interval = fields.String(LocationEventCounts.allowed_intervals)
     event_types = fields.List(fields.String(), allow_none=True, validate=Length(min=1))
