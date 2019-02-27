@@ -37,5 +37,5 @@ class DailyLocationSchema(Schema):
     )
 
     @post_load
-    def make_daily_location(self, params):
+    def make_query_object(self, params):
         return DailyLocationExposed(**params)

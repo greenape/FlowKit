@@ -67,5 +67,5 @@ class LocationEventCountsSchema(Schema):
     )
 
     @post_load
-    def make_query(self, params):
+    def make_query_object(self, params):
         return LocationEventCountsExposed(**params)
