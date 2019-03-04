@@ -53,4 +53,4 @@ popd
 echo "Starting build."
 
 pipenv install
-BRANCH=${CIRCLE_BRANCH:="master"} pipenv run mkdocs "${@:-build}"
+GIT_COMMIT=$(git log -1 --format="%H") pipenv run mike "${@:-build}"

@@ -9,13 +9,15 @@ plugins:
       modules:
         flowmachine:
           section: flowmachine
-          source_repo: "https://github.com/Flowminder/FlowKit/tree/$BRANCH/flowmachine"
+          source_repo: "https://github.com/Flowminder/FlowKit/blob/$GIT_COMMIT/flowmachine"
         flowclient:
           section: flowclient
-          source_repo: "https://github.com/Flowminder/FlowKit/tree/$BRANCH/flowclient"
+          source_repo: "https://github.com/Flowminder/FlowKit/blob/$GIT_COMMIT/flowclient"
   - mknotebooks:
       execute: true
       preamble: "notebook_preamble.py"
+
+copyright: 'Copyright &copy; 2016 - 2019 Flowminder'
 
 theme:
   name: "material"
@@ -74,6 +76,7 @@ extra_css:
   - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
 extra_javascript:
   - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+  - 'javascript/version-selector.js'
 extra:
   repo_icon: "github"
   social:
