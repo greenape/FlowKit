@@ -41,17 +41,17 @@
   }
 
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", REL_BASE_URL + "/../versions.json");
+  xhr.open("GET", "/versions.json");
   xhr.onload = function() {
     var versions = JSON.parse(this.responseText);
 
+
     var realVersion = versions.find(function(i) {
-      return i.version === CURRENT_VERSION ||
-             i.aliases.includes(CURRENT_VERSION);
-    }).version;
+      return i === CURRENT_VERSION;
+    });
 
     var select = makeSelect(versions.map(function(i) {
-      return {text: i.title, value: i.version};
+      return {text: i, value: i};
     }), realVersion);
     select.addEventListener("change", function(event) {
       window.location.href = REL_BASE_URL + "/../" + this.value;
