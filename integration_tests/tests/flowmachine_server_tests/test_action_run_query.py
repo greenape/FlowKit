@@ -3,7 +3,7 @@ import logging
 import pytest
 
 from .helpers import (
-    cache_schema_is_empty,
+    assert_cache_schema_is_empty,
     get_cache_tables,
     poll_until_done,
     send_message_and_get_reply,
@@ -47,7 +47,7 @@ async def test_run_query(zmq_url, fm_conn, redis):
     #
     # Check that we are starting with a clean slate (no cache tables, empty redis).
     #
-    assert cache_schema_is_empty(fm_conn)
+    assert_cache_schema_is_empty(fm_conn)
     assert not redis.exists(expected_query_id)
 
     #

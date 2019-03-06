@@ -72,7 +72,7 @@ def get_cache_tables(fm_conn, exclude_internal_tables=True):
     return sorted(cache_tables)
 
 
-def cache_schema_is_empty(fm_conn, check_internal_tables_are_empty=True):
+def assert_cache_schema_is_empty(fm_conn, check_internal_tables_are_empty=True):
     """
     Return True if the cache schema in flowdb is empty.
 
@@ -80,21 +80,17 @@ def cache_schema_is_empty(fm_conn, check_internal_tables_are_empty=True):
     that no tables for cached queries exist, it is also checked that the two
     internal tables 'cache.cached' and 'cache.dependencies' are empty.
     """
-    insp = inspect(fm_conn.engine)
-    cache_tables = insp.get_table_names(schema="cache")
+    cache_tables = get_cache_tables(fm_conn=fm_conn, exclude_internal_tables=False)
 
     # Check that there are no cached tables except the flowdb-internal ones
-    if cache_tables != ["cache_config", "cached", "dependencies"]:
-        return False
+    assert cache_tables == ["cache_config", "cached", "dependencies"]
 
     if check_internal_tables_are_empty:
         # Check that cache.cached and cache.dependencies are empty
         res1 = fm_conn.engine.execute("SELECT COUNT(*) FROM cache.cached")
         res2 = fm_conn.engine.execute("SELECT COUNT(*) FROM cache.dependencies")
-        if res1.fetchone()[0] != 0 or res2.fetchone()[0] != 0:
-            return False
-
-    return True
+        assert res1.fetchone()[0] == 0
+        assert res2.fetchone()[0] == 0
 
 
 def create_flowdb_version_table(conn):
