@@ -35,9 +35,6 @@ subs = [
     "HartiganCluster",
     "UniqueLocationCounts",
     "SubscriberDegree",
-    "SubscriberInDegree",
-    "SubscriberOutDegree",
-    "ProportionOutgoing",
     "TotalActivePeriodsSubscriber",
     "ContactBalance",
     "EventScore",
@@ -61,7 +58,14 @@ subs = [
     "MeaningfulLocations",
     "MeaningfulLocationsAggregate",
     "MeaningfulLocationsOD",
+    "ProportionEventType",
+    "PeriodicEntropy",
+    "LocationEntropy",
+    "ContactEntropy",
     "DistanceCounterparts",
+    "ContactReciprocal",
+    "ProportionContactReciprocal",
+    "ProportionEventReciprocal",
 ]
 
 rast = ["RasterStatistics"]

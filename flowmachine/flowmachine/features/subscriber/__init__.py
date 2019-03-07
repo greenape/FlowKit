@@ -21,12 +21,11 @@ from .radius_of_gyration import RadiusOfGyration
 from .displacement import Displacement
 from .total_subscriber_events import TotalSubscriberEvents
 from .event_count import EventCount
-from .subscriber_degree import SubscriberDegree, SubscriberInDegree, SubscriberOutDegree
+from .subscriber_degree import SubscriberDegree
 from .subscriber_location_cluster import subscriber_location_cluster, HartiganCluster
 from .most_frequent_location import MostFrequentLocation
 from .last_location import LastLocation
 
-from .proportion_outgoing import ProportionOutgoing
 from .unique_location_counts import UniqueLocationCounts
 from .total_active_periods import TotalActivePeriodsSubscriber
 from .contact_balance import ContactBalance
@@ -35,6 +34,11 @@ from .label_event_score import LabelEventScore
 from .distance_counterparts import DistanceCounterparts
 
 from .pareto_interactions import ParetoInteractions
+from .contact_reciprocal import (
+    ContactReciprocal,
+    ProportionContactReciprocal,
+    ProportionEventReciprocal,
+)
 
 
 from .subscriber_tacs import (
@@ -58,6 +62,8 @@ from .meaningful_locations import (
     MeaningfulLocationsOD,
 )
 
+from .event_type_proportion import ProportionEventType
+
 __all__ = [
     "RadiusOfGyration",
     "NocturnalEvents",
@@ -73,9 +79,6 @@ __all__ = [
     "HartiganCluster",
     "UniqueLocationCounts",
     "SubscriberDegree",
-    "SubscriberInDegree",
-    "SubscriberOutDegree",
-    "ProportionOutgoing",
     "TotalActivePeriodsSubscriber",
     "ContactBalance",
     "EventScore",
@@ -100,5 +103,12 @@ __all__ = [
     "MeaningfulLocations",
     "MeaningfulLocationsAggregate",
     "MeaningfulLocationsOD",
+    "ProportionEventType",
+    "PeriodicEntropy",
+    "LocationEntropy",
+    "ContactEntropy",
     "DistanceCounterparts",
+    "ContactReciprocal",
+    "ProportionEventReciprocal",
+    "ProportionContactReciprocal",
 ]
