@@ -10,7 +10,7 @@
 #
 
 ARG CODE_VERSION=latest
-FROM flowminder/flowdb:${CODE_VERSION}
+FROM greenape/flowdb:${CODE_VERSION}
 
 
 #

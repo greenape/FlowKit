@@ -10,7 +10,7 @@
 #  Extends the basic FlowDB image to include arbitrary amount of test data.
 #
 ARG CODE_VERSION=latest
-FROM flowminder/flowdb:${CODE_VERSION}
+FROM greenape/flowdb:${CODE_VERSION}
 
 RUN echo "deb http://ftp.de.debian.org/debian testing main" > /etc/apt/sources.list \
         && apt-get -y update \
