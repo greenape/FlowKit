@@ -665,13 +665,11 @@ workflows:
           requires:
             - build_docs
             - retag_tagged_build
-            - push_wheel
           <<: *master_only_org_context
       - deploy_docs:
           name: Update versioned docs
           requires:
             - build_docs
             - retag_tagged_build
-            - push_wheel
           tag: CIRCLE_TAG
           <<: *tag_only_org_context
