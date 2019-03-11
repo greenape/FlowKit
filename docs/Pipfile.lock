@@ -473,10 +473,10 @@
         },
         "mkversion": {
             "hashes": [
-                "sha256:99ece25aca7e4d8584d86a9bd042f7e222b81b0b544fc7e9751d276a30638d93"
+                "sha256:d75e7dd227a3762f7f2338e5bee1fa86a0c7e05caad33442b6beebdbbdd98145"
             ],
             "index": "pypi",
-            "version": "==0.1.4"
+            "version": "==0.1.6"
         },
         "multidict": {
             "hashes": [
