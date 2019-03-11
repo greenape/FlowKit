@@ -1,6 +1,6 @@
 site_name: FlowKit
-repo_name: "Flowminder/FlowKit"
-repo_url: https://github.com/Flowminder/FlowKit
+repo_name: "greenape/FlowKit"
+repo_url: https://github.com/greenape/FlowKit
 docs_dir: source
 site_dir: flowkit-docs
 edit_uri: ""
@@ -9,18 +9,24 @@ plugins:
       modules:
         flowmachine:
           section: flowmachine
-          source_repo: "https://github.com/Flowminder/FlowKit/tree/$BRANCH/flowmachine"
+          source_repo: "https://github.com/greenape/FlowKit/blob/$GIT_COMMIT/flowmachine"
         flowclient:
           section: flowclient
-          source_repo: "https://github.com/Flowminder/FlowKit/tree/$BRANCH/flowclient"
+          source_repo: "https://github.com/greenape/FlowKit/blob/$GIT_COMMIT/flowclient"
   - mknotebooks:
       execute: true
       preamble: "notebook_preamble.py"
+  - mkversion:
+      containing_div: "div.md-footer-meta__inner"
+      inject_js: true
+      docs_version: DOCS_VERSION
+
+copyright: "Copyright &copy; 2016 - 2019 greenape"
 
 theme:
   name: "material"
   # Don't include MkDocs' JavaScript
-  include_search_page: false
+  #include_search_page: false
   search_index_only: true
 
   # Default values, taken from mkdocs_theme.yml
@@ -78,6 +84,6 @@ extra:
   repo_icon: "github"
   social:
     - type: "github"
-      link: "https://github.com/Flowminder"
+      link: "https://github.com/greenape"
     - type: "twitter"
-      link: "https://twitter.com/Flowminder"
+      link: "https://twitter.com/greenape"
