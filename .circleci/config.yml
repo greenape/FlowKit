@@ -494,6 +494,7 @@ jobs:
           # We set PIPENV_DONT_LOAD_ENV here to use env vars provided by circle, rather than in the
           # .env for local build usage
           command: |
+            export DOCS_VERSION=${CIRCLE_TAG:-latest}
             PIPENV_DONT_LOAD_ENV=1 pipenv run build
             zip -r flowkit-docs.zip flowkit-docs/*
       - save_cache:
