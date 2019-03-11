@@ -41,16 +41,16 @@ else
 fi
 
 pushd ../flowmachine
-#pipenv install -d
+pipenv install -d
 pipenv run flowmachine &
 echo "Started FlowMachine."
 popd
 pushd ../flowapi
-#pipenv install -d
+pipenv install -d
 pipenv run quart run --port 9090 &
 echo "Started FlowAPI."
 popd
 echo "Starting build."
 
-#pipenv install
+pipenv install
 GIT_COMMIT=$(git log -1 --format="%H") pipenv run mkdocs "${@:-build}"
