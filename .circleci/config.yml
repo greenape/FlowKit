@@ -594,8 +594,6 @@ workflows:
           <<: *run_always_org_context
       - run_flowauth_backend_tests:
           <<: *run_always_org_context
-      - run_flowauth_frontend_tests:
-          <<: *run_always_org_context
       - lint:
           requires:
             - install_flowmachine_deps
@@ -622,7 +620,6 @@ workflows:
       - build_flowauth:
           requires:
             - run_flowauth_backend_tests
-            - run_flowauth_frontend_tests
           <<: *run_always_org_context
       - build_flowapi:
           requires:
