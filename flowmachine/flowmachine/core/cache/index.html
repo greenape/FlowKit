@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.3.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="../../../../assets/javascripts/modernizr.962652e9.js"></script>
+      <script src="../../../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -127,20 +127,16 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                FlowKit
-              </span>
-              <span class="md-header-nav__topic">
-                cache
-              </span>
-            
+            <span class="md-header-nav__topic">
+              FlowKit
+            </span>
+            <span class="md-header-nav__topic">
+              cache
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
-        
-          
         
       </div>
       
@@ -151,20 +147,18 @@
 
   
 
-
-  <a href="https://github.com/Flowminder/FlowKit" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      Flowminder/FlowKit
+<a href="https://github.com/greenape/FlowKit" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    greenape/FlowKit
+  </div>
+</a>
           </div>
         </div>
       
@@ -200,20 +194,18 @@
 
   
 
-
-  <a href="https://github.com/Flowminder/FlowKit" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      Flowminder/FlowKit
+<a href="https://github.com/greenape/FlowKit" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    greenape/FlowKit
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -2723,12 +2715,12 @@
                 
                 
                 <h1 id="flowmachinecorecache">flowmachine.core.cache<a class="headerlink" href="#flowmachinecorecache" title="Permanent link">&para;</a></h1>
-<p>Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L0">flowmachine/core/cache.py</a></p>
+<p>Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L0">flowmachine/core/cache.py</a></p>
 <p>Functions which deal with inspecting and managing the query cache.</p>
 <h2 id="cache_table_exists">cache_table_exists<a class="headerlink" href="#cache_table_exists" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">cache_table_exists</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L406">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L406">flowmachine/core/cache.py</a></p>
 <p>Return True if a cache table for the query with id <code>query_id</code> exist, otherwise return False.</p>
 <h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2747,7 +2739,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_cache_half_life">get_cache_half_life<a class="headerlink" href="#get_cache_half_life" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_cache_half_life</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L296">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L296">flowmachine/core/cache.py</a></p>
 <p>Get the current setting for cache half-life.</p>
 <h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2763,7 +2755,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_cached_query_objects_ordered_by_score">get_cached_query_objects_ordered_by_score<a class="headerlink" href="#get_cached_query_objects_ordered_by_score" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_cached_query_objects_ordered_by_score</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Query&#39;</span><span class="p">),</span> <span class="nb">int</span><span class="p">]]</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L118">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L118">flowmachine/core/cache.py</a></p>
 <p>Get all cached query objects in ascending cache score order.</p>
 <h3 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2779,7 +2771,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_compute_time">get_compute_time<a class="headerlink" href="#get_compute_time" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_compute_time</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L352">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L352">flowmachine/core/cache.py</a></p>
 <p>Get the time in seconds that a cached query took to compute.</p>
 <h3 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2801,7 +2793,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_max_size_of_cache">get_max_size_of_cache<a class="headerlink" href="#get_max_size_of_cache" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_max_size_of_cache</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L278">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L278">flowmachine/core/cache.py</a></p>
 <p>Get the upper limit set in FlowDB for the cache size, in bytes.</p>
 <h3 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2817,7 +2809,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_query_object_by_id">get_query_object_by_id<a class="headerlink" href="#get_query_object_by_id" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_query_object_by_id</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Query&#39;</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L94">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L94">flowmachine/core/cache.py</a></p>
 <p>Get a query object from cache by id.</p>
 <h3 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2839,7 +2831,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_score">get_score<a class="headerlink" href="#get_score" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_score</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L379">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L379">flowmachine/core/cache.py</a></p>
 <p>Get the current cache score for a cached query.</p>
 <h3 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2861,7 +2853,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_size_of_cache">get_size_of_cache<a class="headerlink" href="#get_size_of_cache" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_size_of_cache</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L257">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L257">flowmachine/core/cache.py</a></p>
 <p>Get the total size in bytes of all cache tables.</p>
 <h3 id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2877,7 +2869,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="get_size_of_table">get_size_of_table<a class="headerlink" href="#get_size_of_table" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">get_size_of_table</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table_schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L228">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L228">flowmachine/core/cache.py</a></p>
 <p>Get the size on disk in bytes of a table in the database.</p>
 <h3 id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2903,7 +2895,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="invalidate_cache_by_id">invalidate_cache_by_id<a class="headerlink" href="#invalidate_cache_by_id" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">invalidate_cache_by_id</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cascade</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Query&#39;</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L69">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L69">flowmachine/core/cache.py</a></p>
 <p>Remove a query object from cache by id.</p>
 <h3 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2929,7 +2921,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="reset_cache">reset_cache<a class="headerlink" href="#reset_cache" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">reset_cache</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L45">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L45">flowmachine/core/cache.py</a></p>
 <p>Reset the query cache. Deletes any tables under cache schema, resets the cache count and clears the cached and dependencies tables.</p>
 <h3 id="parameters_10">Parameters<a class="headerlink" href="#parameters_10" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2938,7 +2930,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="set_cache_half_life">set_cache_half_life<a class="headerlink" href="#set_cache_half_life" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">set_cache_half_life</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">cache_half_life</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L314">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L314">flowmachine/core/cache.py</a></p>
 <p>Set the cache's half-life.</p>
 <h3 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2957,7 +2949,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="set_max_size_of_cache">set_max_size_of_cache<a class="headerlink" href="#set_max_size_of_cache" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">set_max_size_of_cache</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">cache_size_limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L336">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L336">flowmachine/core/cache.py</a></p>
 <p>Set the upper limit set in FlowDB for the cache size, in bytes.</p>
 <h3 id="parameters_12">Parameters<a class="headerlink" href="#parameters_12" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2972,7 +2964,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="shrink_below_size">shrink_below_size<a class="headerlink" href="#shrink_below_size" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">shrink_below_size</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">size_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Query&#39;</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L173">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L173">flowmachine/core/cache.py</a></p>
 <p>Remove queries from the cache until it is below a specified size threshold.</p>
 <h3 id="parameters_13">Parameters<a class="headerlink" href="#parameters_13" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2998,7 +2990,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="shrink_one">shrink_one<a class="headerlink" href="#shrink_one" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">shrink_one</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Query&#39;</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L143">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L143">flowmachine/core/cache.py</a></p>
 <p>Remove the lowest scoring cached query from cache and return it and size of it in bytes.</p>
 <h3 id="parameters_14">Parameters<a class="headerlink" href="#parameters_14" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3020,7 +3012,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <h2 id="touch_cache">touch_cache<a class="headerlink" href="#touch_cache" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">touch_cache</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="s1">&#39;Connection&#39;</span><span class="p">,</span> <span class="n">query_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
-Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/flowmachine/core/cache.py#L24">flowmachine/core/cache.py</a></p>
+Source: <a href="https://github.com/greenape/FlowKit/blob/e9c5038f48139bfafccde707431544041d0f2c8d/flowmachine/flowmachine/core/cache.py#L24">flowmachine/core/cache.py</a></p>
 <p>'Touch' a cache record and update the cache score for it.</p>
 <h3 id="parameters_15">Parameters<a class="headerlink" href="#parameters_15" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3039,6 +3031,7 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
 <p>The new cache score</p>
 </li>
 </ul>
+<div id="docs-version" data-version="latest" data-anchor_div="div.md-footer-meta__inner" style="display: none;" />
                 
                   
                 
@@ -3095,6 +3088,10 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
         
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016 - 2019 greenape
+          </div>
+        
         powered by
         <a href="https://www.mkdocs.org">MkDocs</a>
         and
@@ -3102,28 +3099,28 @@ Source: <a href="https://github.com/Flowminder/FlowKit/tree/master/flowmachine/f
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/Flowminder" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/greenape" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://twitter.com/Flowminder" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/greenape" class="md-footer-social__link fa fa-twitter"></a>
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../../../assets/javascripts/application.a353778b.js"></script>
+      <script src="../../../../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
       
         <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../version-select.js"></script>
       
     
   </body>
