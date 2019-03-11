@@ -11,7 +11,7 @@
 #  binaries from.
 #
 ARG CODE_VERSION=latest
-FROM flowminder/flowdb:${CODE_VERSION}
+FROM greenape/flowdb:${CODE_VERSION}
 
 #
 #  Installs `oracle_fdw` for connecting to
