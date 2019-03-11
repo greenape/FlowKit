@@ -22,7 +22,7 @@ defaults:
         FLOWDB_PORT: 5432
         MPLBACKEND: "agg"
         REDIS_HOST: "localhost"
-    - image: flowminder/flowdb-testdata:$CIRCLE_WORKFLOW_ID
+    - image: greenape/flowdb-testdata:$CIRCLE_WORKFLOW_ID
       environment:
         FM_PASSWORD: foo
         API_PASSWORD: foo
@@ -45,7 +45,7 @@ defaults:
         SERVER: localhost
         DB_HOST: localhost
         JWT_SECRET_KEY: secret
-    - image: flowminder/flowdb-testdata:$CIRCLE_WORKFLOW_ID
+    - image: greenape/flowdb-testdata:$CIRCLE_WORKFLOW_ID
       environment:
         FM_PASSWORD: foo
         API_PASSWORD: foo
@@ -60,7 +60,7 @@ defaults:
         FLOWDB_PORT: 5432
         FM_PASSWORD: foo
         API_PASSWORD: foo
-    - image: flowminder/flowdb-synthetic-data:$CIRCLE_WORKFLOW_ID
+    - image: greenape/flowdb-synthetic-data:$CIRCLE_WORKFLOW_ID
       environment:
         N_DAYS: 3
         N_USERS: 400
@@ -150,17 +150,17 @@ jobs:
           command: |
             echo Building version $FLOWDB_VERSION
             echo Tagging as $SAFE_TAG and $CIRCLE_WORKFLOW_ID
-            docker pull flowminder/flowdb:latest && export BUILD_CACHE_TAG=latest || true
-            docker pull flowminder/flowdb:$SAFE_TAG && export BUILD_CACHE_TAG=$SAFE_TAG || true
+            docker pull greenape/flowdb:latest && export BUILD_CACHE_TAG=latest || true
+            docker pull greenape/flowdb:$SAFE_TAG && export BUILD_CACHE_TAG=$SAFE_TAG || true
             echo Using cache from $BUILD_CACHE_TAG
-            docker build --cache-from flowminder/flowdb:$BUILD_CACHE_TAG --build-arg FLOWDB_VERSION=$FLOWDB_VERSION \
-              --build-arg FLOWDB_RELEASE_DATE=$FLOWDB_RELEASE_DATE -t flowminder/flowdb:$SAFE_TAG -t flowminder/flowdb:$CIRCLE_WORKFLOW_ID flowdb
+            docker build --cache-from greenape/flowdb:$BUILD_CACHE_TAG --build-arg FLOWDB_VERSION=$FLOWDB_VERSION \
+              --build-arg FLOWDB_RELEASE_DATE=$FLOWDB_RELEASE_DATE -t greenape/flowdb:$SAFE_TAG -t greenape/flowdb:$CIRCLE_WORKFLOW_ID flowdb
       - run:
           name: Build testdata image
           command: |
             echo Building testdata version $FLOWDB_VERSION
             echo Tagging as testdata-$SAFE_TAG and testdata-$CIRCLE_WORKFLOW_ID
-            docker build --build-arg CODE_VERSION=$SAFE_TAG -t flowminder/flowdb-testdata:$SAFE_TAG -t flowminder/flowdb-testdata:$CIRCLE_WORKFLOW_ID \
+            docker build --build-arg CODE_VERSION=$SAFE_TAG -t greenape/flowdb-testdata:$SAFE_TAG -t greenape/flowdb-testdata:$CIRCLE_WORKFLOW_ID \
             flowdb/testdata
           background: true
       - run:
@@ -169,23 +169,23 @@ jobs:
             echo Building Oracle_fdw version $FLOWDB_VERSION
             echo Tagging as oracle-$SAFE_TAG
             docker build --build-arg CODE_VERSION=$SAFE_TAG --build-arg ORACLE_BINARY_SOURCE=https://raw.githubusercontent.com/bumpx/oracle-instantclient/master \
-             -t flowminder/flowdb:oracle-$SAFE_TAG flowdb/oracle_fdw
+             -t greenape/flowdb:oracle-$SAFE_TAG flowdb/oracle_fdw
           background: true
       - run:
           name: Build synthetic data image
           command: |
             echo Building synthetic testdata version $FLOWDB_VERSION.
             echo Tagging as synthetic-data-$SAFE_TAG synthetic-data-$CIRCLE_WORKFLOW_ID
-            docker build --build-arg CODE_VERSION=$SAFE_TAG -t flowminder/flowdb-synthetic-data:$SAFE_TAG -t flowminder/flowdb-synthetic-data:$CIRCLE_WORKFLOW_ID \
+            docker build --build-arg CODE_VERSION=$SAFE_TAG -t greenape/flowdb-synthetic-data:$SAFE_TAG -t greenape/flowdb-synthetic-data:$CIRCLE_WORKFLOW_ID \
               -f flowdb/testdata/Dockerfile.synthetic_data flowdb/testdata
       - run:
-         name: Test that not providing a superuser password causes the container to exit
-         command: |
-           if docker run flowminder/flowdb:$SAFE_TAG; then
-               exit 1
-           else
-               echo "Correctly failed with no superuser password"
-           fi
+          name: Test that not providing a superuser password causes the container to exit
+          command: |
+            if docker run greenape/flowdb:$SAFE_TAG; then
+                exit 1
+            else
+                echo "Correctly failed with no superuser password"
+            fi
       - run:
           name: Create data dir
           command: |
@@ -197,12 +197,12 @@ jobs:
               --volume=${FLOWDB_INGESTION_DIR}:/ingestion:ro -e FM_PASSWORD=foo -e API_PASSWORD=foo \
               -e MAX_CPUS=2 -e MAX_WORKERS=2 -e MAX_WORKERS_PER_GATHER=2 \
               -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-              --detach flowminder/flowdb:$SAFE_TAG
+              --detach greenape/flowdb:$SAFE_TAG
 
             echo "Waiting for flowdb to be ready.."
             docker run --name flowdb_oracle --shm-size=1G --publish $ORACLE_DB_PORT:5432 -e FM_PASSWORD=foo -e API_PASSWORD=foo \
             -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-             --detach flowminder/flowdb:oracle-$SAFE_TAG
+             --detach greenape/flowdb:oracle-$SAFE_TAG
             docker exec flowdb bash -c 'i=0;until [ $i -ge 24 ] || (pg_isready -h 127.0.0.1 -p 5432 -U flowdb);do let i=i+1; echo Waiting 10s; sleep 10;done'
             echo "Waiting for flowdb with oracle_fdw to be ready.."
             docker exec flowdb_oracle bash -c 'i=0;until [ $i -ge 24 ] || (pg_isready -h 127.0.0.1 -p 5432);do let i=i+1; echo Waiting 10s; sleep 10;done'
@@ -224,14 +224,14 @@ jobs:
       - run:
           name: Push images to Docker cloud
           command: |
-            docker push flowminder/flowdb:${SAFE_TAG}
-            docker push flowminder/flowdb:${CIRCLE_WORKFLOW_ID}
+            docker push greenape/flowdb:${SAFE_TAG}
+            docker push greenape/flowdb:${CIRCLE_WORKFLOW_ID}
 
-            docker push flowminder/flowdb-testdata:${SAFE_TAG}
-            docker push flowminder/flowdb-testdata:${CIRCLE_WORKFLOW_ID}
+            docker push greenape/flowdb-testdata:${SAFE_TAG}
+            docker push greenape/flowdb-testdata:${CIRCLE_WORKFLOW_ID}
 
-            docker push flowminder/flowdb-synthetic-data:${SAFE_TAG}
-            docker push flowminder/flowdb-synthetic-data:${CIRCLE_WORKFLOW_ID}
+            docker push greenape/flowdb-synthetic-data:${SAFE_TAG}
+            docker push greenape/flowdb-synthetic-data:${CIRCLE_WORKFLOW_ID}
       - persist_to_workspace:
           root: /home/circleci/
           paths:
@@ -374,7 +374,6 @@ jobs:
       - store_test_results:
           path: results
 
-
   run_flowclient_tests:
     docker:
       - image: circleci/python:3.7
@@ -409,11 +408,11 @@ jobs:
           name: Build flowmachine image
           command: |
             echo "Tagging as $CIRCLE_WORKFLOW_ID"
-            docker build -t flowminder/flowmachine:$CIRCLE_WORKFLOW_ID ./flowmachine
+            docker build -t greenape/flowmachine:$CIRCLE_WORKFLOW_ID ./flowmachine
       - run:
           name: Push images to Docker cloud
           command: |
-            docker push flowminder/flowmachine:$CIRCLE_WORKFLOW_ID
+            docker push greenape/flowmachine:$CIRCLE_WORKFLOW_ID
 
   build_flowauth:
     docker:
@@ -428,11 +427,11 @@ jobs:
           command: docker login --username $DOCKER_CLOUD_USER --password $DOCKER_CLOUD_PASSWORD
       - run:
           name: Build flowauth image
-          command: docker build -t flowminder/flowauth:$CIRCLE_WORKFLOW_ID ./flowauth
+          command: docker build -t greenape/flowauth:$CIRCLE_WORKFLOW_ID ./flowauth
       - run:
           name: Push images to Docker cloud
           command: |
-            docker push flowminder/flowauth:$CIRCLE_WORKFLOW_ID
+            docker push greenape/flowauth:$CIRCLE_WORKFLOW_ID
 
   build_flowapi:
     docker:
@@ -447,11 +446,11 @@ jobs:
           command: docker login --username $DOCKER_CLOUD_USER --password $DOCKER_CLOUD_PASSWORD
       - run:
           name: Build flowapi image
-          command: docker build -t flowminder/flowapi:$CIRCLE_WORKFLOW_ID ./flowapi
+          command: docker build -t greenape/flowapi:$CIRCLE_WORKFLOW_ID ./flowapi
       - run:
           name: Push images to Docker cloud
           command: |
-            docker push flowminder/flowapi:$CIRCLE_WORKFLOW_ID
+            docker push greenape/flowapi:$CIRCLE_WORKFLOW_ID
 
   integration_tests:
     docker: *docs_build
@@ -575,12 +574,8 @@ jobs:
             export DOCKER_USER=$DOCKER_CLOUD_USER
             export DOCKER_PASS=$DOCKER_CLOUD_PASSWORD
             for IMAGE in flowapi flowmachine flowdb flowdb-synthetic-data flowdb-testdata flowauth; do
-              docker-retag flowminder/$IMAGE:$CIRCLE_WORKFLOW_ID ${<< parameters.tag >>:-latest}
+              docker-retag greenape/$IMAGE:$CIRCLE_WORKFLOW_ID ${<< parameters.tag >>:-latest}
             done
-
-
-
-
 
 workflows:
   run_build_pipeline:
@@ -662,10 +657,6 @@ workflows:
             - build_flowauth
             - build_docs
           tag: CIRCLE_TAG
-          <<: *tag_only_org_context
-      - push_wheel:
-          requires:
-            - build_client_wheel
           <<: *tag_only_org_context
       - deploy_docs:
           requires:
