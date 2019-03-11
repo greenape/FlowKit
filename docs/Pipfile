@@ -28,7 +28,7 @@ flask-jwt-extended = "*"
 quart = "*"
 python-dotenv = "*"
 structlog = "*"
-mike = "*"
+mkversion = "*"
 
 [dev-packages]
 

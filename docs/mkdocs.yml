@@ -17,7 +17,9 @@ plugins:
       execute: true
       preamble: "notebook_preamble.py"
   - mkversion:
-      containing_div: "md-footer-meta__inner"
+      containing_div: "div.md-footer-meta__inner"
+      inject_js: true
+      docs_version: DOCS_VERSION
 
 copyright: 'Copyright &copy; 2016 - 2019 Flowminder'
 
